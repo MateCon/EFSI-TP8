@@ -1,5 +1,7 @@
 import { useState } from "react";
 import PropTypes from 'prop-types';
+import { useContext } from "react";
+import { ContactosContext } from "../components/contactoProvider"
 
 function Form({ nombre, mensaje, setNombre, setMensaje, onSubmit }) {
     return (
@@ -24,10 +26,11 @@ Form.propTypes = {
 export default function Contacto() {
     const [nombre, setNombre] = useState("")
     const [mensaje, setMensaje] = useState("")
+    const { contactos, setContactos } = useContext(ContactosContext)
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(nombre, mensaje);
+        setContactos ([...contactos, { nombre, mensaje }])
     }
 
     return (

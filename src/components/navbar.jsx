@@ -8,7 +8,9 @@ export default function Navbar() {
                 <Link to="/"><p className="text-sm">INICIO</p></Link>
                 <Link to="/quienes-somos"><p className="text-sm">QUIENES SOMOS</p></Link>
                 <Link to="/productos"><p className="text-sm">PRODUCTOS</p></Link>
+                <Link to="/carrito"><p className="text-sm">CARRITO</p></Link>
                 <Link to="/contacto"><p className="text-sm">CONTACTO</p></Link>
+                <Link to="/contactos"><p className="text-sm">LISTA CONTACTOS</p></Link>
             </div>
         </nav>
     )
