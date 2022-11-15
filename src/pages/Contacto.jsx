@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import { useContext } from "react";
 import { ContactosContext } from "../components/contactoProvider"
+import { useNavigate } from "react-router-dom";
 
 function Form({ nombre, mensaje, setNombre, setMensaje, onSubmit }) {
     return (
@@ -27,10 +28,13 @@ export default function Contacto() {
     const [nombre, setNombre] = useState("")
     const [mensaje, setMensaje] = useState("")
     const { contactos, setContactos } = useContext(ContactosContext)
+    const navigate = useNavigate();
 
     const onSubmit = (e) => {
         e.preventDefault();
-        setContactos ([...contactos, { nombre, mensaje }])
+        console.log(contactos);
+        setContactos ({ ...contactos, [nombre]: { nombre, mensajes: [...(contactos[nombre]?.mensajes || []), mensaje] } })
+        navigate("/");
     }
 
     return (

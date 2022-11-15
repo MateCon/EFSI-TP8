@@ -28,15 +28,17 @@ export default function Product() {
             <p>Marca: {producto?.brand}</p>
             <p>Rating: {producto?.rating}/5</p>
             <p>Stock: {producto?.stock}</p>
-            {carrito[id]
-                ? <button onClick={() => {
-                    const newCarrito = {...carrito};
-                    delete newCarrito[id];
-                    setCarrito(newCarrito);
-                }} className="bg-red-500 px-4 py-2 rounded-md text-white w-full font-semibold text-xl">Eliminar</button>
-                : <button onClick={() => {
-                    setCarrito({ ...carrito, [id]: producto });
-                }} className="bg-green-500 px-4 py-2 rounded-md text-white w-full font-semibold text-xl">Agregar</button>}
+            <p>Cantidad en carrito: {carrito[id]?.cant || 0}</p>
+            <div className="flex gap-2">
+                <button onClick={() => {
+                    setCarrito({ ...carrito, [id]: { ...producto, cant: (carrito[id]?.cant || 0) + 1 }});
+                }} className="bg-green-500 px-4 py-2 rounded-md text-white w-full font-semibold text-xl">Agregar Uno</button>
+                {carrito[id] && carrito[id].cant !== 0
+                    ? <button onClick={() => {
+                        setCarrito({ ...carrito, [id]: { ...producto, cant: Math.max(carrito[id].cant - 1, 0) }});
+                    }} className="bg-red-500 px-4 py-2 rounded-md text-white w-full font-semibold text-xl">Eliminar Uno</button>
+                    : null}
+            </div>
         </section>
     );
 }
